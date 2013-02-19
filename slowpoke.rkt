@@ -58,7 +58,7 @@
     [_ format-string args ...] to [displayln (format format-string args ...)] }
 
 { bind-macro test-val ()
-    [_ id action answ] to [with result = (try ~ #f :: ((fn () => action))
+    [_ id action answ] to [with result = (try ~ #f :: action
                                           catch [fn (ex) => #t]
                                                 [fn (ex) => ~ #t :: ex] )
                             and raised = [head result]
@@ -67,8 +67,9 @@
                            when raised [write-line "~a FAIL: raised exception ~v instead of returning a result" id result]
                            when [equal? result answ] [write-line "~a SUCCESS" id]
                            else (write-line "~a FAIL: returned wrong result ~v" id result)] }
+
 { bind-macro test-exn ()
-    [_ id action pred] to [with result = (try ~ #f :: ((fn () => action))
+    [_ id action pred] to [with result = (try ~ #f :: action
                                           catch [fn (ex) => #t]
                                                 [fn (ex) => ~ #t :: ex] )
                             and raised = [head result]
