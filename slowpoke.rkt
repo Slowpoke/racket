@@ -82,6 +82,9 @@
 { bind-macro ~ 
     [_ x:expr op:expr y:body] to [op x y.tmpl] }
 
+{ bind-macro !
+    [_ x:expr ...] to [not (x ...)] }
+
 { bind-macro  ::  to cons }
 { bind-macro head to car }
 { bind-macro tail to cdr }
