@@ -71,6 +71,8 @@
     [_ (~optional args:expr) (~literal =>) body:body] to [lambda (?? args ()) body.tmpl] }
 
 { bind-macro when
+    [_ e:expr       then:expr-when/else       _:else else:body] to [if e  then.tmpl      else.tmpl]
+    [_ e:expr (~seq then:expr-when/else ...+) _:else else:body] to [if e (then.tmpl ...) else.tmpl]
     [(~seq when:when-body ...+) _:else else:body]   to [cond when.tmpl ... (#t else.tmpl)]
     [(~seq when:when-body ...) last:when-body-last] to [cond when.tmpl ... last.tmpl] }
 
